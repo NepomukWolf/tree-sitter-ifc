@@ -128,11 +128,8 @@ module.exports = grammar({
     string: $ =>
       seq(
         "'",
-        repeat(choice(
-          /[^']/,
-          "''"   // escaped quote
-        )),
-        "'"
+        optional(token.immediate(/([^']|'')+/)),
+        token.immediate("'")
       ),
 
     number: $ => /-?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[Ee][+-]?[0-9]+)?/,
