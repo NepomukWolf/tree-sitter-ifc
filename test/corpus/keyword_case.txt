@@ -1,0 +1,175 @@
+================================================================================
+Uppercase typed value
+================================================================================
+
+#1=IFCPROPERTYSINGLEVALUE('A',$,IFCCOUNTMEASURE(3),$);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (null_value))
+          (parameter
+            (typed_parameter
+              (entity_name)
+              (parameter_list
+                (parameter_sequence
+                  (parameter
+                    (number))))))
+          (parameter
+            (null_value)))))))
+
+================================================================================
+Lowercase typed value
+================================================================================
+
+#1=IFCPROPERTYSINGLEVALUE('A',$,ifccountmeasure(3),$);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (null_value))
+          (parameter
+            (typed_parameter
+              (entity_name)
+              (parameter_list
+                (parameter_sequence
+                  (parameter
+                    (number))))))
+          (parameter
+            (null_value)))))))
+
+================================================================================
+Mixed-case typed value
+================================================================================
+
+#1=IFCPROPERTYSINGLEVALUE('A',$,ifcCountMeasure(3),$);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (null_value))
+          (parameter
+            (typed_parameter
+              (entity_name)
+              (parameter_list
+                (parameter_sequence
+                  (parameter
+                    (number))))))
+          (parameter
+            (null_value)))))))
+
+================================================================================
+Lowercase and mixed-case entity names
+================================================================================
+
+#1=ifcpropertysinglevalue('A',$,IFCLABEL('x'),$);
+#2=IfcPropertySingleValue('B',$,IfcLabel('y'),$);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (null_value))
+          (parameter
+            (typed_parameter
+              (entity_name)
+              (parameter_list
+                (parameter_sequence
+                  (parameter
+                    (string))))))
+          (parameter
+            (null_value))))))
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (null_value))
+          (parameter
+            (typed_parameter
+              (entity_name)
+              (parameter_list
+                (parameter_sequence
+                  (parameter
+                    (string))))))
+          (parameter
+            (null_value)))))))
+
+================================================================================
+Lowercase and mixed-case enumerations
+================================================================================
+
+#1=IFCWALL(.notdefined.,.NotDefined.,.T.);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (enumeration))
+          (parameter
+            (enumeration))
+          (parameter
+            (enumeration)))))))
+
+================================================================================
+Leading underscore in entity name
+================================================================================
+
+#1=_USER_ENTITY(.T.);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (enumeration)))))))

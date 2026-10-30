@@ -134,7 +134,7 @@
     },
     "entity_name": {
       "type": "PATTERN",
-      "value": "[A-Z][A-Z0-9_]*"
+      "value": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "parameter_list": {
       "type": "SEQ",
@@ -267,7 +267,7 @@
     },
     "enumeration": {
       "type": "PATTERN",
-      "value": "\\.[A-Z0-9_]+\\."
+      "value": "\\.[A-Za-z0-9_]+\\."
     },
     "null_value": {
       "type": "STRING",
