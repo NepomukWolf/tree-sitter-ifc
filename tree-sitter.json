@@ -12,6 +12,15 @@
       "injection-regex": "^ifc$",
       "class-name": "TreeSitterIfc",
       "highlights": "queries/highlights.scm"
+    },
+    {
+      "name": "ifc_compact",
+      "camelcase": "IfcCompact",
+      "title": "Ifc compact",
+      "scope": "source.ifc.compact",
+      "path": "compact",
+      "file-types": [],
+      "class-name": "TreeSitterIfcCompact"
     }
   ],
   "metadata": {

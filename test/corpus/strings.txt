@@ -1,0 +1,109 @@
+================================================================================
+Comment delimiters inside strings
+================================================================================
+
+#1=IFCX('a /* b','c */');
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (string)))))))
+
+================================================================================
+Escaped quotes
+================================================================================
+
+#1=IFCX('it''s','''');
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (string)))))))
+
+================================================================================
+Comment end inside a string
+================================================================================
+
+#1=IFCX('a */ b');
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string)))))))
+
+================================================================================
+Unterminated string followed by another entity
+================================================================================
+
+#1=IFCX('abc,$);
+#2=IFCY('x');
+#3=IFCZ(2);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string)))
+        (ERROR
+          (UNEXPECTED 'x')))))
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (number)))))))
+
+================================================================================
+Whole comment inside a string
+================================================================================
+
+#1=IFCX('/* a */',' ','');
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (string))
+          (parameter
+            (string)))))))

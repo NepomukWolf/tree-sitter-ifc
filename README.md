@@ -56,6 +56,18 @@ tree-sitter generate
 
 This updates generated files in `src/` (`parser.c`, `grammar.json`, `node-types.json`), which are intended to be committed.
 
+### Compact grammar
+
+[`compact/grammar.js`](compact/grammar.js) extends [`grammar.js`](grammar.js) and lexes valid entities, parameter lists, number and reference lists and strings as single tokens. It parses large files faster but has no nodes inside those tokens, so `queries/highlights.scm` does not apply to it. Only the Rust binding builds it, as `LANGUAGE_COMPACT`; `LANGUAGE` is the grammar above.
+
+Regenerate and test it after changing either grammar:
+
+```bash
+cd compact
+tree-sitter generate
+tree-sitter test
+```
+
 ### Error Node Debugging
 
 This repository includes a helper to print each `ERROR` node with source location and line context:

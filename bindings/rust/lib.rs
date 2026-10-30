@@ -22,10 +22,17 @@ use tree_sitter_language::LanguageFn;
 
 extern "C" {
     fn tree_sitter_ifc() -> *const ();
+    fn tree_sitter_ifc_compact() -> *const ();
 }
 
 /// The tree-sitter [`LanguageFn`] for this grammar.
 pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_ifc) };
+
+/// [`LANGUAGE`] with valid entities, parameter lists, number and reference lists and strings
+/// lexed as single tokens, so their contents have no child nodes. Both accept the same documents,
+/// but those tokens change error recovery: reparse a document whose tree has errors with
+/// [`LANGUAGE`]. Only the Rust binding builds this grammar.
+pub const LANGUAGE_COMPACT: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_ifc_compact) };
 
 /// The content of the [`node-types.json`] file for this grammar.
 ///
@@ -56,5 +63,13 @@ mod tests {
         parser
             .set_language(&super::LANGUAGE.into())
             .expect("Error loading Ifc parser");
+    }
+
+    #[test]
+    fn test_can_load_compact_grammar() {
+        let mut parser = tree_sitter::Parser::new();
+        parser
+            .set_language(&super::LANGUAGE_COMPACT.into())
+            .expect("Error loading Ifc compact parser");
     }
 }

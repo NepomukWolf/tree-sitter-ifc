@@ -1,0 +1,152 @@
+================================================================================
+Whole-entity token in the data section
+================================================================================
+
+DATA;
+#1=IFCWALL('a',$,.T.,IFCLABEL('x'),(#1,#2),*);
+ENDSEC;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (data_section
+      (entity_instance))))
+
+================================================================================
+Compact parameter list outside the data section
+================================================================================
+
+#1=IFCX(1.,'a',$,IFCLABEL('x'));
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (compact_parameter_list))))
+
+================================================================================
+Lists nested one level deep stay compact
+================================================================================
+
+#1=IFCX(((1.,2.),(3.,4.)),((#1),(#2)),(IFCLABEL('a'),'b'));
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (compact_parameter_list))))
+
+================================================================================
+Lists nested deeper fall back to structured parameters
+================================================================================
+
+#1=IFCX((((1.))),(1.,2.),(#1,#2));
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (list
+              (parameter_sequence
+                (parameter
+                  (list
+                    (parameter_sequence
+                      (parameter
+                        (compact_number_list))))))))
+          (parameter
+            (compact_number_list))
+          (parameter
+            (compact_reference_list)))))))
+
+================================================================================
+Strings containing comment delimiters stay compact
+================================================================================
+
+DATA;
+#1=IFCX('a /* b',1.);
+#2=IFCX('/* a */','c */');
+ENDSEC;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (data_section
+      (entity_instance)
+      (entity_instance))))
+
+================================================================================
+Strings with slashes and escaped quotes stay compact
+================================================================================
+
+DATA;
+#1=IFCX('a/b','it''s','c//');
+ENDSEC;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (data_section
+      (entity_instance))))
+
+================================================================================
+An error between whole-entity tokens
+================================================================================
+
+DATA;
+#1=IFCX(1.);
+#2=IFCX(1x);
+#3=IFCX(2.);
+ENDSEC;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (data_section
+      (entity_instance)
+      (entity_instance
+        (instance_id)
+        (entity_name)
+        (parameter_list
+          (parameter_sequence
+            (parameter
+              (number)))
+          (ERROR
+            (UNEXPECTED 'x'))))
+      (entity_instance))))
+
+================================================================================
+A missing semicolon after a compact parameter list
+================================================================================
+
+DATA;
+#1=IFCX(1.)
+#2=IFCX(2.);
+ENDSEC;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (data_section
+      (entity_instance
+        (instance_id)
+        (entity_name)
+        (compact_parameter_list)
+        (MISSING ";"))
+      (entity_instance))))

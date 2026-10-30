@@ -1,0 +1,102 @@
+================================================================================
+Number and reference lists
+================================================================================
+
+#1=IFCX((1.,-2.5E3),(#1,#2),(1.,#2),());
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (list
+              (parameter_sequence
+                (parameter
+                  (number))
+                (parameter
+                  (number)))))
+          (parameter
+            (list
+              (parameter_sequence
+                (parameter
+                  (reference))
+                (parameter
+                  (reference)))))
+          (parameter
+            (list
+              (parameter_sequence
+                (parameter
+                  (number))
+                (parameter
+                  (reference)))))
+          (parameter
+            (list)))))))
+
+================================================================================
+Nested lists
+================================================================================
+
+#1=IFCX(((1.,2.),(3.,4.)),(((#1))));
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (list
+              (parameter_sequence
+                (parameter
+                  (list
+                    (parameter_sequence
+                      (parameter
+                        (number))
+                      (parameter
+                        (number)))))
+                (parameter
+                  (list
+                    (parameter_sequence
+                      (parameter
+                        (number))
+                      (parameter
+                        (number))))))))
+          (parameter
+            (list
+              (parameter_sequence
+                (parameter
+                  (list
+                    (parameter_sequence
+                      (parameter
+                        (list
+                          (parameter_sequence
+                            (parameter
+                              (reference))))))))))))))))
+
+================================================================================
+Strings containing a comment opener
+================================================================================
+
+#1=IFCX('a /* b',1.);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (statement
+    (entity_instance
+      (instance_id)
+      (entity_name)
+      (parameter_list
+        (parameter_sequence
+          (parameter
+            (string))
+          (parameter
+            (number)))))))

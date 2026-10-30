@@ -15,6 +15,8 @@ fn main() {
         c_config.include(&wasm_headers);
     }
 
+    let mut compact_config = c_config.clone();
+
     let parser_path = src_dir.join("parser.c");
     c_config.file(&parser_path);
     println!("cargo:rerun-if-changed={}", parser_path.to_str().unwrap());
@@ -26,6 +28,14 @@ fn main() {
     }
 
     c_config.compile("tree-sitter-ifc");
+
+    let compact_dir = std::path::Path::new("compact/src");
+    let compact_path = compact_dir.join("parser.c");
+    compact_config
+        .include(compact_dir)
+        .file(&compact_path)
+        .compile("tree-sitter-ifc-compact");
+    println!("cargo:rerun-if-changed={}", compact_path.to_str().unwrap());
 
     println!("cargo:rustc-check-cfg=cfg(with_highlights_query)");
     if !"queries/highlights.scm".is_empty() && std::path::Path::new("queries/highlights.scm").exists() {
